@@ -14,7 +14,7 @@ namespace KubotaTestApi.Controllers.api.ireporter
     public class Report2Controller : AbstractController
     {
         // GET: ReportController
-        public ActionResult Index()
+        public ActionResult Index(int value)
         {
             logger.Debug("[start]call ReportContorller#index");
             logger.Debug("[end]call ReportContorller#index");
