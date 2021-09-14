@@ -11,12 +11,14 @@ namespace KubotaTestApi.Service
         /// <summary>
         /// 自動帳票作成
         /// </summary>
-        public ApiResult Create()
+        public ApiResult Create(int value)
         {
-            // 今後、追加での検証で業務ロジックはここで処理し、iReporterServiceに渡す
+            // 今後、追加検証で業務ロジックを書く必要がある場合は本サービスクラスに記載、iReporterServiceに渡す
+            var _dicClustarData = new Dictionary<string, string>();
+            _dicClustarData.Add(TARGET_CLUSUTER_ID, value.ToString());
 
             var irepo = new IReporterService();
-            return irepo.AutoReportCreation();
+            return irepo.AutoReportCreation(DEF_TOP_ID,_dicClustarData);
         }
     }
 }
