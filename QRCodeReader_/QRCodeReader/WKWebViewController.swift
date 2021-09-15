@@ -9,7 +9,7 @@
 import UIKit
 
 class WKWebViewController: UIViewController {
-    private let urlString :String = "http://yahoo.co.jp/"
+    private let urlString :String = "http://172.16.161.87/kubota_utunomiya/KARI001WG_00"
     
     @IBOutlet weak var wkWebView: UIWebView!
     
@@ -23,5 +23,14 @@ class WKWebViewController: UIViewController {
         
         // 例えば、yahooトップページだと、以下で、検索窓に値埋め込みが可能
 //        document.forms[0].elements[1].value = "saaa"
+    }
+    @IBAction func btnJavascriptTapDown(_ sender: Any) {
+        print("btnJavascriptTapDown")
+        
+        var js = "document.getElementById('MainContent_txtRenban').value = 123456"
+        let result = wkWebView.stringByEvaluatingJavaScript(from: js)
+        print(result)
+        
+        
     }
 }
