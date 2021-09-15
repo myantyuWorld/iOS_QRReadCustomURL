@@ -125,7 +125,7 @@ class QRScannerController: UIViewController {
             // ※　カスタムURLスキームはメインスレッド(UI thread)で実行する必要があるので、入力帳票作成処理完了まで待機する
             dispatchGroup.notify(queue: .main) {
                 print("call custom url scheme kick!")
-                let customUrlscheme = "jp.co.irepoter.openreport://repid=" + self.repTopId
+                let customUrlscheme = "jp.co.cimtops.ireporter.openreport://repid=" + self.repTopId
                 print(customUrlscheme)
                 
                 if let url = URL(string: customUrlscheme) {
@@ -185,12 +185,11 @@ class QRScannerController: UIViewController {
         create auto report
      */
     func createAutoReport(value: String, completion:@escaping CompletionClosure){
-        let url = URL(string: "http://192.168.0.105:28443/api/irepo/report2")
+        let url = URL(string: "http://172.16.161.74:28443/api/irepo/report?value=" + value)
         var request = URLRequest(url: url!)
-        request.httpMethod = "Post"
+        //request.httpMethod = "Post"
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {return}
-            print("////////aaaaaaaaaaaaaaaaa")
             do {
                 // json serialize
                 let object = try JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
