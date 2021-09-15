@@ -9,19 +9,8 @@ namespace KubotaTestApi.Service
 {
     public class IReporterService : AbstractBaseService
     {
-        private static string CONMAS_USER_ID;
-        private static string CONMAS_PASSWORD;
-        private static string CONMAS_URL;
-        private static string DEF_TOP_ID;
-
         static IReporterService()
         {
-            // 設定値の取得
-            var config = GetConfiguration();
-            CONMAS_USER_ID = config["AppSettings:ConmasApiUser"];
-            CONMAS_PASSWORD = config["AppSettings:ConmasApiPassword"];
-            CONMAS_URL = config["AppSettings:ConmasApiUrl"];
-            DEF_TOP_ID = config["AppSettings:DefTopId"];
         }
 
         /// <summary>
@@ -35,16 +24,16 @@ namespace KubotaTestApi.Service
         /// <param name="actionId">対策ID</param>
         /// <param name="defSheetCount">シート数</param>
         /// <returns>処理結果</returns>
-        public ApiResult AutoReportCreation(int defTopId = 0, Dictionary<string, string> _dicClustarData = null)
+        public ApiResult AutoReportCreation(string defTopId = "", Dictionary<string, string> _dicClustarData = null)
         {
             logger.Info("iReporterService#AutoReportCreation 【自動帳票作成処理　開始】");
             logger.Info($"defTopId : {defTopId}");
 
-            ApiResult apiResult = new();
+            ApiResult apiResult = new ApiResult();
             var csvSimple = new CsvSimple
             {
                 writePath = $"{Directory.GetCurrentDirectory()}\\conmas.csv",
-                defTopId = defTopId == 0 ? DEF_TOP_ID : defTopId.ToString(),
+                defTopId = defTopId == "" ? DEF_TOP_ID : defTopId.ToString(),
             };
             
             csvSimple.dicClusterData = _dicClustarData != null ? _dicClustarData : new Dictionary<string, string>();

@@ -14,18 +14,9 @@ namespace KubotaTestApi.Controllers.api.ireporter
     public class Report2Controller : AbstractController
     {
         // GET: ReportController
-        public ActionResult Index()
+        public ActionResult Index(int value)
         {
             logger.Debug("[start]call ReportContorller#index");
-            logger.Debug("[end]call ReportContorller#index");
-            return Ok("Hello Report Controller!");
-        }
-
-        // POST: ReportController/Create
-        [HttpPost]
-        public ActionResult Create()
-        {
-            logger.Debug("[start]call ReportContorller#Post");
             try
             {
                 // テストコード
@@ -38,7 +29,7 @@ namespace KubotaTestApi.Controllers.api.ireporter
             }
             finally
             {
-                logger.Debug("[end]call ReportContorller#Post");
+               logger.Debug("[end]call ReportContorller#index");
             }
         }
     }

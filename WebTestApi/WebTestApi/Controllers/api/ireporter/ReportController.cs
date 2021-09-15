@@ -14,26 +14,18 @@ namespace KubotaTestApi.Controllers.api.ireporter
     public class ReportController : AbstractController
     {
         // GET: ReportController
-        public ActionResult Index()
+        public ActionResult Index(int value)
         {
             logger.Debug("[start]call ReportContorller#index");
-            logger.Debug("[end]call ReportContorller#index");
-            return Ok("Hello Report Controller!");
-        }
-
-        // POST: ReportController/Create
-        [HttpPost]
-        public ActionResult Create()
-        {
-            logger.Debug("[start]call ReportContorller#Post");
             try
             {
                 var reportService = new GenerateReport();
-                var apiResult = reportService.Create();
+                var apiResult = reportService.Create(value);
                 if (apiResult.Code == 0)
                 {
                     return Ok(new RepTop(apiResult.RepTopId, ""));
-                } else
+                }
+                else
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, "帳票作成に失敗しました");
                 }
@@ -42,9 +34,10 @@ namespace KubotaTestApi.Controllers.api.ireporter
             {
                 logger.Fatal($"{e.Message} : {e.StackTrace}");
                 return StatusCode(StatusCodes.Status500InternalServerError, e);
-            } finally
+            }
+            finally
             {
-                logger.Debug("[end]call ReportContorller#Post");
+                logger.Debug("[end]call ReportContorller#index");
             }
         }
     }
