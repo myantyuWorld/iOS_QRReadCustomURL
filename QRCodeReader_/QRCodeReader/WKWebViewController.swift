@@ -9,7 +9,7 @@
 import UIKit
 
 class WKWebViewController: UIViewController {
-    private let urlString :String = "http://172.16.161.87/kubota_utunomiya/KARI001WG_00"
+    private let urlString :String = "http://172.16.161.87/hogehoge/KARI001WG_00"
     
     @IBOutlet weak var wkWebView: UIWebView!
     
